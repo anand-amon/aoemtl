@@ -11,7 +11,7 @@ _parser.add_argument('--weighting', type=str, default='EW',
     help='loss weighing strategies, option: EW, UW, GradNorm, GLS, RLW, \
         MGDA, PCGrad, GradVac, CAGrad, GradDrop, DWA, IMTL')
 _parser.add_argument('--arch', type=str, default='HPS',
-                    help='architecture for MTL, option: HPS, MTAN')
+                    help='architecture for MTL, option: HPS, MMoE')
 _parser.add_argument('--rep_grad', action='store_true', default=False, 
                     help='computing gradient for representation or sharing parameters')
 _parser.add_argument('--multi_input', action='store_true', default=False, 
@@ -95,9 +95,6 @@ _parser.add_argument('--FORUM_phi', type=float, default=0.1, help=' ') # FORUM
 ## CGC
 _parser.add_argument('--img_size', nargs='+', help='image size for CGC')
 _parser.add_argument('--num_experts', nargs='+', help='the number of experts for sharing and task-specific')
-## DSelect_k
-_parser.add_argument('--num_nonzeros', type=int, default=2, help='num_nonzeros for DSelect-k')
-_parser.add_argument('--kgamma', type=float, default=1.0, help='gamma for DSelect-k')
 
 LibMTL_args = _parser
 
@@ -194,13 +191,10 @@ def prepare_args(params):
     else:
         raise ValueError('No support weighting method {}'.format(params.weighting)) 
         
-    if params.arch in ['HPS', 'Cross_stitch', 'MTAN', 'CGC', 'PLE', 'MMoE', 'DSelect_k', 'DIY', 'LTB', 'AOEMTL']:
-        if params.arch in ['CGC', 'PLE', 'MMoE', 'DSelect_k', 'AOEMTL']:
+    if params.arch in ['HPS', 'CGC', 'PLE', 'MMoE', 'AOEMTL']:
+        if params.arch in ['CGC', 'PLE', 'MMoE', 'AOEMTL']:
             kwargs['arch_args']['img_size'] = tuple(params.img_size)#np.array(params.img_size, dtype=int).prod()
             kwargs['arch_args']['num_experts'] = [int(num) for num in params.num_experts]
-        if params.arch in ['DSelect_k']:
-            kwargs['arch_args']['kgamma'] = params.kgamma
-            kwargs['arch_args']['num_nonzeros'] = params.num_nonzeros
     else:
         raise ValueError('No support architecture method {}'.format(params.arch)) 
         

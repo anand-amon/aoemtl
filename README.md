@@ -41,7 +41,7 @@ This implementation corresponds to the model described in the author’s paper, 
 Autonomy of Experts (AoE-MTL) fuses expert outputs using intrinsic L2-norm weighting:
 
 $$
-z^{(t)} \;=\; \sum_{k=1}^{N_s + N_t} 
+z^{(t)} \=\ \sum_{k=1}^{N_s + N_t} 
 \frac{\lVert y_k^{(t)} \rVert_2}{\sum_m \lVert y_m^{(t)} \rVert_2 + \epsilon}\; y_k^{(t)}
 $$
 

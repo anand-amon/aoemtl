@@ -16,7 +16,7 @@ It extends the original [LibMTL](https://github.com/median-research-group/LibMTL
 - (b) Autonomy of Experts
 - (c) AoE-MTL
 
-This implementation corresponds to the model described in the author’s paper, **“AoE-MTL: Gate-Free Expert Selection for Efficient Multi-Task Learning”** available [here](https://doi.org/10.5281/zenodo.17622521)
+This implementation corresponds to the model described in the author’s paper, **“AoE-MTL: Gate-Free Expert Selection for Efficient Multi-Task Learning”** available here. (Not available yet)
 
 ---
 
